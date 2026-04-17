@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hari Ram Selvaraj Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/graduation-hat-favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <canvas id="particles" aria-hidden="true"></canvas>
+    <canvas id="cursor-trail" aria-hidden="true"></canvas>
+
+    <header class="top-toggle-wrap">
+      <div class="top-toggle-mask" aria-hidden="true"></div>
+      <nav class="top-toggle" aria-label="Section navigation">
+        <a class="top-toggle-link" href="#home">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3.75 3.75 10.5h1.5v8.25h5.25V13.5h3v5.25h5.25V10.5h1.5Z"/></svg>
+          </span>
+          <span>Home</span>
+        </a>
+        <a class="top-toggle-link" href="#about">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 12.75a4.5 4.5 0 1 0-4.5-4.5 4.5 4.5 0 0 0 4.5 4.5Zm0 1.5c-4.57 0-8.25 2.23-8.25 5v.25a.75.75 0 0 0 .75.75h15a.75.75 0 0 0 .75-.75v-.25c0-2.77-3.68-5-8.25-5Z"/></svg>
+          </span>
+          <span>About</span>
+        </a>
+        <a class="top-toggle-link" href="#projects">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4.5 4.5h6v6h-6Zm9 0h6v6h-6Zm-9 9h6v6h-6Zm9 0h6v6h-6Z"/></svg>
+          </span>
+          <span>Projects</span>
+        </a>
+        <a class="top-toggle-link" href="#contact">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4.5 6.75A2.25 2.25 0 0 1 6.75 4.5h10.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 17.25Zm1.98-.75 5.02 4.19a.75.75 0 0 0 .96 0L17.48 6Z"/></svg>
+          </span>
+          <span>Contact</span>
+        </a>
+        <a class="top-toggle-link" href="./overview.html">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3.75 5.25A2.25 2.25 0 0 1 6 3h12a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 18 21H6a2.25 2.25 0 0 1-2.25-2.25Zm3 1.5v10.5h10.5V6.75Zm1.5 1.5h7.5v1.5h-7.5Zm0 3h7.5v1.5h-7.5Z"/></svg>
+          </span>
+          <span>Overview</span>
+        </a>
+        <button class="theme-toggle" type="button" aria-label="Toggle light and dark mode">
+          <span class="theme-icon theme-icon-sun" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 18a6 6 0 1 0-6-6 6 6 0 0 0 6 6Zm0-15.75a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75Zm0 16.5a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-1.5a.75.75 0 0 1 .75-.75ZM4.22 5.28a.75.75 0 0 1 1.06 0l1.06 1.06A.75.75 0 1 1 5.28 7.4L4.22 6.34a.75.75 0 0 1 0-1.06Zm13.44 13.44a.75.75 0 0 1 1.06 0l1.06 1.06a.75.75 0 0 1-1.06 1.06l-1.06-1.06a.75.75 0 0 1 0-1.06ZM2.25 12a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1-.75-.75Zm16.5 0a.75.75 0 0 1 .75-.75H21a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1-.75-.75ZM5.28 16.6a.75.75 0 0 1 1.06 1.06L5.28 18.72a.75.75 0 0 1-1.06-1.06Zm13.44-11.32a.75.75 0 0 1 1.06-1.06l1.06 1.06a.75.75 0 1 1-1.06 1.06Z"/></svg>
+          </span>
+          <span class="theme-icon theme-icon-secondary" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M11.25 2.75a.75.75 0 0 1 1.5 0v2a.75.75 0 0 1-1.5 0Zm0 16.5a.75.75 0 0 1 1.5 0v2a.75.75 0 0 1-1.5 0ZM4.67 5.73a.75.75 0 0 1 1.06 0l1.42 1.41a.75.75 0 1 1-1.06 1.06L4.67 6.79a.75.75 0 0 1 0-1.06Zm12.18 12.18a.75.75 0 0 1 1.06 0l1.42 1.42a.75.75 0 1 1-1.06 1.06l-1.42-1.42a.75.75 0 0 1 0-1.06ZM2.75 11.25h2a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5Zm16.5 0h2a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5ZM6.09 16.85a.75.75 0 0 1 1.06 1.06l-1.42 1.42a.75.75 0 1 1-1.06-1.06Zm12.18-12.18a.75.75 0 0 1 1.06 1.06l-1.42 1.42a.75.75 0 1 1-1.06-1.06ZM12 7.25A4.75 4.75 0 1 1 7.25 12 4.75 4.75 0 0 1 12 7.25Zm0 1.5A3.25 3.25 0 1 0 15.25 12 3.25 3.25 0 0 0 12 8.75Z"/></svg>
+          </span>
+        </button>
+      </nav>
+      <div class="top-clock" aria-live="polite" id="syracuse-time">--:--:--</div>
+    </header>
+
+    <main>
+      <section id="home" class="landing">
+        <div class="home-shell">
+          <div class="home-copy">
+            <div class="home-identity">
+              <div class="home-heading">
+                <h1 class="home-title">
+                  <span class="title-letter">D</span><span class="title-letter">a</span><span class="title-letter">t</span><span class="title-letter">a</span>
+                  <span class="title-letter" style="margin-left: 0.3em;"></span>
+                  <span class="title-letter">S</span><span class="title-letter">c</span><span class="title-letter">i</span><span class="title-letter">e</span><span class="title-letter">n</span><span class="title-letter">t</span><span class="title-letter">i</span><span class="title-letter">s</span><span class="title-letter">t</span>
+                </h1>
+              </div>
+            </div>
+            <div class="role-rotator" aria-label="Rotating roles">
+              <div class="role-track">
+                <div class="role-item">ML Engineering</div>
+                <div class="role-item">Data Analysis</div>
+                <div class="role-item">AI Engineering</div>
+                <div class="role-item">ML Engineering</div>
+              </div>
+            </div>
+            <p class="home-description">
+              Crafting intelligent solutions from data through deep learning, statistics, and
+              real-world insight.
+            </p>
+
+            <div class="home-actions">
+              <a class="home-button" href="#projects">Projects</a>
+              <a class="home-button" href="#contact">Contact</a>
+            </div>
+
+            <div class="home-socials" aria-label="Social links">
+              <a class="social-link icon-glow" data-icon-glow href="https://github.com/hariramselvaraj" target="_blank" rel="noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 .5C5.65.5.5 5.66.5 12.03c0 5.1 3.3 9.43 7.88 10.96.58.11.79-.25.79-.56 0-.27-.01-1.02-.02-2.01-3.2.7-3.88-1.54-3.88-1.54-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.78 2.7 1.26 3.36.97.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.29-5.25-5.73 0-1.27.45-2.31 1.19-3.12-.12-.29-.52-1.46.11-3.04 0 0 .98-.31 3.2 1.19a11.1 11.1 0 0 1 5.83 0c2.22-1.5 3.2-1.19 3.2-1.19.63 1.58.23 2.75.11 3.04.74.81 1.19 1.85 1.19 3.12 0 4.45-2.69 5.43-5.26 5.72.41.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .31.21.68.8.56A11.54 11.54 0 0 0 23.5 12.03C23.5 5.66 18.35.5 12 .5Z"></path>
+                </svg>
+              </a>
+              <a class="social-link icon-glow" data-icon-glow href="https://www.linkedin.com/in/hariramselvaraj/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5.001A2.5 2.5 0 0 0 4.98 3.5ZM3 9h4v12H3V9Zm7 0h3.83v1.71h.05c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.67 4.8 6.14V21h-4v-5.51c0-1.31-.03-3-1.83-3-1.84 0-2.12 1.43-2.12 2.91V21h-4V9Z"></path>
+                </svg>
+              </a>
+              <a class="social-link icon-glow" data-icon-glow href="tel:+13154148890" aria-label="Phone">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.11.37 2.3.57 3.54.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.3 21 3 13.7 3 4a1 1 0 0 1 1-1h3.49a1 1 0 0 1 1 1c0 1.24.2 2.43.57 3.54a1 1 0 0 1-.24 1.01l-2.2 2.24Z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <button class="scroll-cue" id="scroll-cue" type="button" aria-label="Scroll to About section">
+          <span class="scroll-cue-mouse"><span class="scroll-cue-dot"></span></span>
+          <span class="scroll-cue-text">Scroll down</span>
+        </button>
+      </section>
+
+      <section id="about" class="about-section section">
+        <aside class="about-toc" id="about-toc" aria-label="About page table of contents">
+          <button class="toc-link about-reveal" data-target="Introduction" type="button">
+            <span class="toc-line"></span>
+            <span class="toc-text">Introduction</span>
+          </button>
+          <button class="toc-link about-reveal" data-target="Work Experience" type="button">
+            <span class="toc-line"></span>
+            <span class="toc-text">Work Experience</span>
+          </button>
+          <button class="toc-link about-reveal" data-target="Studies" type="button">
+            <span class="toc-line"></span>
+            <span class="toc-text">Studies</span>
+          </button>
+          <button class="toc-link about-reveal" data-target="Technical Skills" type="button">
+            <span class="toc-line"></span>
+            <span class="toc-text">Technical Skills</span>
+          </button>
+        </aside>
+
+        <div class="about-shell">
+          <aside class="about-sidebar">
+            <div class="about-meta"></div>
+          </aside>
+
+          <div class="about-content">
+            <div class="callout-pill about-reveal">
+              <span>Schedule a call</span>
+              <span class="callout-arrow">></span>
+            </div>
+
+            <div class="about-hero about-reveal" id="Introduction">
+              <h2 class="about-name">Hari Ram Selvaraj</h2>
+              <p class="about-role">Data Scientist | AI Engineer</p>
+            </div>
+
+            <div class="social-actions about-reveal">
+              <a class="social-button" href="https://www.linkedin.com/in/hariramselvaraj/" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a class="social-button" href="https://github.com/hariramselvaraj" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="social-button" href="mailto:HariramSelvaraj@yahoo.com">HariramSelvaraj@yahoo.com</a>
+            </div>
+
+            <div class="about-copy about-reveal">
+              <p>
+                Graduate student in Applied Data Science at Syracuse University, focused on
+                machine learning, NLP, and building practical AI solutions.
+              </p>
+            </div>
+
+            <div class="about-duo">
+              <div class="about-block about-reveal" id="Work Experience">
+                <h3 class="section-title">
+                  <span class="section-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M9 6V4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V6h3.75A2.25 2.25 0 0 1 21 8.25v9A2.25 2.25 0 0 1 18.75 19.5H5.25A2.25 2.25 0 0 1 3 17.25v-9A2.25 2.25 0 0 1 5.25 6Zm1.5 0h3V4.8h-3Z"/>
+                    </svg>
+                  </span>
+                  <span>Work Experience</span>
+                </h3>
+                <div class="study-timeline">
+                  <article class="timeline-item">
+                    <div class="item-head">
+                      <strong>ProHealth Home Health & hospice</strong>
+                      <span>May 2025 - Present</span>
+                    </div>
+                    <p class="accent-copy">Data Scientist / AI Engineer</p>
+                  </article>
+                  <article class="timeline-item">
+                    <div class="item-head">
+                      <strong>TATA ELXSI</strong>
+                      <span>Aug 2022 - Dec 2022</span>
+                    </div>
+                    <p class="accent-copy">Intern</p>
+                  </article>
+                  <article class="timeline-item">
+                    <div class="item-head">
+                      <strong>TATA ELXSI</strong>
+                      <span>Jan 2023 - Aug 2024</span>
+                    </div>
+                    <p class="accent-copy">Data Scientist</p>
+                  </article>
+                  <article class="timeline-item">
+                    <div class="item-head">
+                      <strong>NEXIS, Syracuse University</strong>
+                      <span>Jan 2025 - Present</span>
+                    </div>
+                    <p class="accent-copy">AI Researcher</p>
+                  </article>
+                </div>
+              </div>
+
+              <div class="about-block about-reveal studies-block" id="Studies">
+                <h3 class="section-title">
+                  <span class="section-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 3 1.5 8.25 12 13.5l8.55-4.28v5.53h1.95V8.25Zm-6 8.45v3.3c0 1.95 2.8 3.75 6 3.75s6-1.8 6-3.75v-3.3L12 14.45Z"/>
+                    </svg>
+                  </span>
+                  <span>Studies</span>
+                </h3>
+                <div class="study-timeline">
+                  <article class="timeline-item">
+                    <div class="item-head">
+                      <strong>Syracuse University</strong>
+                      <span>2024 - 2026</span>
+                    </div>
+                    <p>Master of Science in Applied Data Science</p>
+                    <p><strong>Grade:</strong> 3.93</p>
+                    <p>
+                      <strong>Coursework:</strong> DBMS, Applied Machine Learning, Natural
+                      Language Processing, Deep Learning.
+                    </p>
+                  </article>
+                  <article class="timeline-item">
+                    <div class="item-head">
+                      <strong>Bangalore North University</strong>
+                      <span>2019 - 2022</span>
+                    </div>
+                    <p>Bachelor of Computer Applications</p>
+                    <p><strong>Grade:</strong> 3.09</p>
+                  </article>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-block about-reveal" id="Technical Skills">
+              <h3 class="section-title">
+                <span class="section-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="m21.2 7.2-2.4 2.4a4.9 4.9 0 0 1-6.2 6.2l-5.3 5.3a1.5 1.5 0 0 1-2.1-2.1l5.3-5.3a4.9 4.9 0 0 1 6.2-6.2l2.4-2.4a1.5 1.5 0 0 1 2.1 2.1Z"/>
+                  </svg>
+                </span>
+                <span>Technical Skills</span>
+              </h3>
+              <div class="skill-stack">
+                <div class="skill-item">
+                  <div class="skill-grid">
+                    <span class="tag">Python</span>
+                    <span class="tag">R</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">Scikit-learn</span>
+                    <span class="tag">TensorFlow</span>
+                    <span class="tag">Keras</span>
+                    <span class="tag">Pandas</span>
+                    <span class="tag">NumPy</span>
+                    <span class="tag">Tableau</span>
+                    <span class="tag">Power BI</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="projects-section section">
+        <div class="projects-shell">
+          <div class="projects-heading">
+            <h2>Projects</h2>
+            <p>Selected project placeholders in a parallel grid layout.</p>
+          </div>
+
+          <div class="projects-grid">
+            <article class="project-card" data-project-card data-project-id="1">
+              <div class="project-card-glow"></div>
+              <div class="project-card-inner">
+                <div class="project-card-media" aria-hidden="true"></div>
+               <h3>Bitcoin flash crash prediction  -  Reddit sentiment + price signals</h3>
+                <p>
+                  Binary flash-crash classifier using minute-level BTC market signals and
+                  time-aligned Reddit sentiment for risk monitoring research.
+                </p>
+                <div class="project-card-actions">
+                  <a class="project-card-link project-card-view" href="#">View Details</a>
+                  <a class="project-card-github" href="https://github.com/SNIPOFIST/Bitcoin-FlashCrash-Prediction" aria-label="View repository on GitHub">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.66.5 12.03c0 5.1 3.3 9.43 7.88 10.96.58.11.79-.25.79-.56 0-.27-.01-1.02-.02-2.01-3.2.7-3.88-1.54-3.88-1.54-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.78 2.7 1.26 3.36.97.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.29-5.25-5.73 0-1.27.45-2.31 1.19-3.12-.12-.29-.52-1.46.11-3.04 0 0 .98-.31 3.2 1.19a11.1 11.1 0 0 1 5.83 0c2.22-1.5 3.2-1.19 3.2-1.19.63 1.58.23 2.75.11 3.04.74.81 1.19 1.85 1.19 3.12 0 4.45-2.69 5.43-5.26 5.72.41.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .31.21.68.8.56A11.54 11.54 0 0 0 23.5 12.03C23.5 5.66 18.35.5 12 .5Z"></path></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card" data-project-card data-project-id="2">
+              <div class="project-card-glow"></div>
+              <div class="project-card-inner">
+                <div class="project-card-media" aria-hidden="true"></div>
+                <h3>Deep Learning Drowsiness Detection Using Infrared Images</h3>
+                <p>
+                  CNN pipeline that classifies infrared eye crops into awake vs sleepy states
+                  to support driver-drowsiness alert prototypes.
+                </p>
+                <div class="project-card-actions">
+                  <a class="project-card-link project-card-view" href="#">View Details</a>
+                  <a class="project-card-link" href="https://snipofist.github.io/Deep_Learning-Drowsiness_Detection_Using_Infrared_Images/">Download the Models</a>
+                  <a class="project-card-github" href="https://github.com/SNIPOFIST/Deep_Learning-Drowsiness_Detection_Using_Infrared_Images" aria-label="View repository on GitHub">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.66.5 12.03c0 5.1 3.3 9.43 7.88 10.96.58.11.79-.25.79-.56 0-.27-.01-1.02-.02-2.01-3.2.7-3.88-1.54-3.88-1.54-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.78 2.7 1.26 3.36.97.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.29-5.25-5.73 0-1.27.45-2.31 1.19-3.12-.12-.29-.52-1.46.11-3.04 0 0 .98-.31 3.2 1.19a11.1 11.1 0 0 1 5.83 0c2.22-1.5 3.2-1.19 3.2-1.19.63 1.58.23 2.75.11 3.04.74.81 1.19 1.85 1.19 3.12 0 4.45-2.69 5.43-5.26 5.72.41.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .31.21.68.8.56A11.54 11.54 0 0 0 23.5 12.03C23.5 5.66 18.35.5 12 .5Z"></path></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card" data-project-card data-project-id="3">
+              <div class="project-card-glow"></div>
+              <div class="project-card-inner">
+                <div class="project-card-media" aria-hidden="true"></div>
+                <h3>DataThon  -  Syracuse code violations &amp; property assessment</h3>
+                <p>
+                  Join Syracuse code violations to the 2025 assessment roll, explore patterns, model assessment vs
+                  violations, and ship Folium spatial risk maps (Track B) plus EDA (Track A).
+                </p>
+                <div class="project-card-actions">
+                  <a class="project-card-link project-card-view" href="#">View Details</a>
+                  <a class="project-card-link" href="https://snipofist.github.io/DataThon26/">Open Dashboard</a>
+                  <a class="project-card-github" href="https://github.com/SNIPOFIST/DataThon26" aria-label="View repository on GitHub">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.66.5 12.03c0 5.1 3.3 9.43 7.88 10.96.58.11.79-.25.79-.56 0-.27-.01-1.02-.02-2.01-3.2.7-3.88-1.54-3.88-1.54-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.78 2.7 1.26 3.36.97.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.29-5.25-5.73 0-1.27.45-2.31 1.19-3.12-.12-.29-.52-1.46.11-3.04 0 0 .98-.31 3.2 1.19a11.1 11.1 0 0 1 5.83 0c2.22-1.5 3.2-1.19 3.2-1.19.63 1.58.23 2.75.11 3.04.74.81 1.19 1.85 1.19 3.12 0 4.45-2.69 5.43-5.26 5.72.41.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .31.21.68.8.56A11.54 11.54 0 0 0 23.5 12.03C23.5 5.66 18.35.5 12 .5Z"></path></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card" data-project-card data-project-id="4">
+              <div class="project-card-glow"></div>
+              <div class="project-card-inner">
+                <div class="project-card-media" aria-hidden="true"></div>
+                <h3>Syracuse Crime: Data Visualization (Shiny)</h3>
+                <p>
+                  Interactive R Shiny dashboard for Syracuse crime incidents with map, date/crime filters, and daily count trends to make open city data easier to explore.
+                </p>
+                <div class="project-card-actions">
+                  <a class="project-card-link project-card-view" href="#">View Details</a>
+                  <a class="project-card-link" href="https://mydatasciencegallery.shinyapps.io/Syracuse_Crime_Data_Visualization/">Open Dashboard</a>
+                  <a class="project-card-github" href="https://github.com/SNIPOFIST/Syracuse_City_Crime_Data_Visualization" aria-label="View repository on GitHub">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.66.5 12.03c0 5.1 3.3 9.43 7.88 10.96.58.11.79-.25.79-.56 0-.27-.01-1.02-.02-2.01-3.2.7-3.88-1.54-3.88-1.54-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.78 2.7 1.26 3.36.97.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.29-5.25-5.73 0-1.27.45-2.31 1.19-3.12-.12-.29-.52-1.46.11-3.04 0 0 .98-.31 3.2 1.19a11.1 11.1 0 0 1 5.83 0c2.22-1.5 3.2-1.19 3.2-1.19.63 1.58.23 2.75.11 3.04.74.81 1.19 1.85 1.19 3.12 0 4.45-2.69 5.43-5.26 5.72.41.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .31.21.68.8.56A11.54 11.54 0 0 0 23.5 12.03C23.5 5.66 18.35.5 12 .5Z"></path></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card" data-project-card data-project-id="5">
+              <div class="project-card-glow"></div>
+              <div class="project-card-inner">
+                <div class="project-card-media" aria-hidden="true"></div>
+                <h3>MediExplain  -  RAG and modular AI assistants</h3>
+                <p>
+                  Streamlit prototype that explains complex medical text in plain language
+                  with optional retrieval grounding and modular assistant workflows.
+                </p>
+                <div class="project-card-actions">
+                  <a class="project-card-link project-card-view" href="#">View Details</a>
+                  <a class="project-card-github" href="https://github.com/SNIPOFIST/mediexplain-RAG_with_modular_AI_assistants-" aria-label="View repository on GitHub">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.66.5 12.03c0 5.1 3.3 9.43 7.88 10.96.58.11.79-.25.79-.56 0-.27-.01-1.02-.02-2.01-3.2.7-3.88-1.54-3.88-1.54-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.78 2.7 1.26 3.36.97.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.29-5.25-5.73 0-1.27.45-2.31 1.19-3.12-.12-.29-.52-1.46.11-3.04 0 0 .98-.31 3.2 1.19a11.1 11.1 0 0 1 5.83 0c2.22-1.5 3.2-1.19 3.2-1.19.63 1.58.23 2.75.11 3.04.74.81 1.19 1.85 1.19 3.12 0 4.45-2.69 5.43-5.26 5.72.41.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .31.21.68.8.56A11.54 11.54 0 0 0 23.5 12.03C23.5 5.66 18.35.5 12 .5Z"></path></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card" data-project-card data-project-id="6">
+              <div class="project-card-glow"></div>
+              <div class="project-card-inner">
+                <div class="project-card-media" aria-hidden="true"></div>
+                <h3>Project Title Six</h3>
+                <p>Short placeholder summary for a project overview and positioning.</p>
+                <div class="project-card-actions">
+                  <a class="project-card-link project-card-view" href="#">View Details</a>
+                  <a class="project-card-github" href="https://github.com/hariramselvaraj" aria-label="View GitHub profile">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.66.5 12.03c0 5.1 3.3 9.43 7.88 10.96.58.11.79-.25.79-.56 0-.27-.01-1.02-.02-2.01-3.2.7-3.88-1.54-3.88-1.54-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.78 2.7 1.26 3.36.97.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.29-5.25-5.73 0-1.27.45-2.31 1.19-3.12-.12-.29-.52-1.46.11-3.04 0 0 .98-.31 3.2 1.19a11.1 11.1 0 0 1 5.83 0c2.22-1.5 3.2-1.19 3.2-1.19.63 1.58.23 2.75.11 3.04.74.81 1.19 1.85 1.19 3.12 0 4.45-2.69 5.43-5.26 5.72.41.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .31.21.68.8.56A11.54 11.54 0 0 0 23.5 12.03C23.5 5.66 18.35.5 12 .5Z"></path></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="content-shell">
+          <h2>Contact</h2>
+          <p>Get in touch below.</p>
+          <div class="contact-layout">
+            <article class="contact-panel">
+              <div class="contact-panel-head">
+                <h3>Get in Touch</h3>
+              </div>
+              <p class="contact-panel-copy">Have something to discuss? Send a message and let's talk.</p>
+              <form class="contact-form" action="#" method="post">
+                <label class="contact-field">
+                  <span>Your Name</span>
+                  <input type="text" name="name" placeholder="Your Name" />
+                </label>
+                <label class="contact-field">
+                  <span>Your Email</span>
+                  <input type="email" name="email" placeholder="Your Email" />
+                </label>
+                <label class="contact-field">
+                  <span>Message</span>
+                  <textarea name="message" rows="5" placeholder="Your Message"></textarea>
+                </label>
+                <button class="contact-submit" type="submit">Send Message</button>
+              </form>
+              <div class="contact-icons" aria-label="Contact links">
+                <a class="social-link contact-icon" href="https://github.com/hariramselvaraj" target="_blank" rel="noreferrer" aria-label="GitHub">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.66.5 12.03c0 5.1 3.3 9.43 7.88 10.96.58.11.79-.25.79-.56 0-.27-.01-1.02-.02-2.01-3.2.7-3.88-1.54-3.88-1.54-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.78 2.7 1.26 3.36.97.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.29-5.25-5.73 0-1.27.45-2.31 1.19-3.12-.12-.29-.52-1.46.11-3.04 0 0 .98-.31 3.2 1.19a11.1 11.1 0 0 1 5.83 0c2.22-1.5 3.2-1.19 3.2-1.19.63 1.58.23 2.75.11 3.04.74.81 1.19 1.85 1.19 3.12 0 4.45-2.69 5.43-5.26 5.72.41.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .31.21.68.8.56A11.54 11.54 0 0 0 23.5 12.03C23.5 5.66 18.35.5 12 .5Z"></path></svg>
+                </a>
+                <a class="social-link contact-icon" href="https://www.linkedin.com/in/hariramselvaraj/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5.001A2.5 2.5 0 0 0 4.98 3.5ZM3 9h4v12H3V9Zm7 0h3.83v1.71h.05c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.67 4.8 6.14V21h-4v-5.51c0-1.31-.03-3-1.83-3-1.84 0-2.12 1.43-2.12 2.91V21h-4V9Z"></path></svg>
+                </a>
+                <a class="social-link contact-icon" href="tel:+13154148890" aria-label="Phone">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.11.37 2.3.57 3.54.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.3 21 3 13.7 3 4a1 1 0 0 1 1-1h3.49a1 1 0 0 1 1 1c0 1.24.2 2.43.57 3.54a1 1 0 0 1-.24 1.01l-2.2 2.24Z"></path></svg>
+                </a>
+                <a class="social-link contact-icon" href="mailto:HariramSelvaraj@yahoo.com" aria-label="Email">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 6.75A2.25 2.25 0 0 1 6.75 4.5h10.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 17.25Zm1.98-.75 5.02 4.19a.75.75 0 0 0 .96 0L17.48 6Z"></path></svg>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer-shell">
+        <p>© 2026 <span class="footer-name">hari ram</span></p>
+        <div class="site-footer-socials" aria-label="Footer social links">
+          <a class="footer-icon" href="https://github.com/hariramselvaraj" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 .5C5.65.5.5 5.66.5 12.03c0 5.1 3.3 9.43 7.88 10.96.58.11.79-.25.79-.56 0-.27-.01-1.02-.02-2.01-3.2.7-3.88-1.54-3.88-1.54-.52-1.34-1.28-1.69-1.28-1.69-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.78 2.7 1.26 3.36.97.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.29-5.25-5.73 0-1.27.45-2.31 1.19-3.12-.12-.29-.52-1.46.11-3.04 0 0 .98-.31 3.2 1.19a11.1 11.1 0 0 1 5.83 0c2.22-1.5 3.2-1.19 3.2-1.19.63 1.58.23 2.75.11 3.04.74.81 1.19 1.85 1.19 3.12 0 4.45-2.69 5.43-5.26 5.72.41.36.78 1.08.78 2.18 0 1.57-.01 2.84-.01 3.23 0 .31.21.68.8.56A11.54 11.54 0 0 0 23.5 12.03C23.5 5.66 18.35.5 12 .5Z"></path>
+            </svg>
+          </a>
+          <a class="footer-icon" href="https://www.linkedin.com/in/hariramselvaraj/" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4.98 3.5a2.5 2.5 0 1 0 0 5.001A2.5 2.5 0 0 0 4.98 3.5ZM3 9h4v12H3V9Zm7 0h3.83v1.71h.05c.53-1 1.84-2.06 3.79-2.06 4.05 0 4.8 2.67 4.8 6.14V21h-4v-5.51c0-1.31-.03-3-1.83-3-1.84 0-2.12 1.43-2.12 2.91V21h-4V9Z"></path>
+            </svg>
+          </a>
+          <a class="footer-icon" href="https://www.instagram.com/hariram.selvaraj/?hl=en" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7.25 2.5h9.5A4.75 4.75 0 0 1 21.5 7.25v9.5a4.75 4.75 0 0 1-4.75 4.75h-9.5A4.75 4.75 0 0 1 2.5 16.75v-9.5A4.75 4.75 0 0 1 7.25 2.5Zm0 1.5A3.25 3.25 0 0 0 4 7.25v9.5A3.25 3.25 0 0 0 7.25 20h9.5A3.25 3.25 0 0 0 20 16.75v-9.5A3.25 3.25 0 0 0 16.75 4Zm9.95 1.15a1.05 1.05 0 1 1-1.05 1.05 1.05 1.05 0 0 1 1.05-1.05ZM12 7a5 5 0 1 1-5 5 5 5 0 0 1 5-5Zm0 1.5A3.5 3.5 0 1 0 15.5 12 3.5 3.5 0 0 0 12 8.5Z"></path>
+            </svg>
+          </a>
+          <a class="footer-icon" href="mailto:HariramSelvaraj@yahoo.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4.5 6.75A2.25 2.25 0 0 1 6.75 4.5h10.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 17.25Zm1.98-.75 5.02 4.19a.75.75 0 0 0 .96 0L17.48 6Z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <section class="project-detail" id="project-detail" aria-hidden="true">
+      <div class="project-detail-backdrop" data-detail-close></div>
+      <article class="project-detail-panel" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+        <button class="detail-close" type="button" data-detail-close aria-label="Back to projects">
+          Back
+        </button>
+        <h2 id="detail-title" class="detail-title">Project Title</h2>
+        <p class="detail-subtitle" id="detail-subtitle">Project overview</p>
+
+        <div class="detail-layout">
+          <div class="detail-main">
+            <p class="detail-description" id="detail-description"></p>
+            <section class="detail-high-level">
+              <h3>High-level project description</h3>
+              <p id="detail-high-level-copy"></p>
+            </section>
+            <div class="detail-actions">
+              <a class="detail-action" id="detail-case-study" href="#" target="_blank" rel="noreferrer">Read case study</a>
+              <a class="detail-action" id="detail-live" href="#" target="_blank" rel="noreferrer">View project</a>
+              <a class="detail-action" id="detail-github" href="#" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+            <section class="detail-features">
+              <h3>Impact / Key Features</h3>
+              <ul id="detail-features-list"></ul>
+            </section>
+            <span class="detail-action detail-stack" id="detail-stack"></span>
+          </div>
+
+          <aside class="detail-media">
+            <div class="detail-media-head">
+              <h3>Project Gallery</h3>
+              <div class="detail-media-nav">
+                <button type="button" id="detail-prev" aria-label="Previous snapshot">&lt;</button>
+                <button type="button" id="detail-next" aria-label="Next snapshot">&gt;</button>
+              </div>
+            </div>
+            <div class="detail-media-track" id="detail-media-track"></div>
+          </aside>
+        </div>
+      </article>
+    </section>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
