@@ -895,8 +895,10 @@ for (const icon of iconGlows) {
 for (const link of document.querySelectorAll("a[href]")) {
   const href = link.getAttribute("href") || "";
   const isInternalHash = href.startsWith("#");
+  const isRelativePath = href.startsWith("./") || href.startsWith("../") || href.startsWith("/");
+  const isExternal = /^https?:\/\//i.test(href);
   const isSpecial = href.startsWith("mailto:") || href.startsWith("tel:");
-  if (!isInternalHash && !isSpecial) {
+  if (isExternal && !isInternalHash && !isRelativePath && !isSpecial) {
     link.setAttribute("target", "_blank");
     link.setAttribute("rel", "noreferrer noopener");
   }

@@ -23,6 +23,40 @@
         padding: 7rem 1rem 3rem;
       }
 
+      .overview-side-menu {
+        position: fixed;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 12;
+        display: grid;
+        gap: 0.65rem;
+        width: 180px;
+      }
+
+      .overview-side-link {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid var(--panel-border);
+        border-radius: 0.6rem;
+        padding: 0.5rem 0.65rem;
+        text-decoration: none;
+        color: var(--text-soft);
+        background: color-mix(in srgb, var(--panel-bg) 90%, transparent);
+        font-size: 0.86rem;
+        transition: border-color 180ms ease, color 180ms ease, transform 180ms ease;
+      }
+
+      .overview-side-link:hover {
+        color: var(--text-main);
+        transform: translateX(2px);
+      }
+
+      .overview-side-link.is-active {
+        color: var(--text-main);
+        border-color: color-mix(in srgb, var(--text-soft) 55%, transparent);
+      }
+
       .overview-card {
         width: min(1280px, calc(100% - 2rem));
         border: 1px solid var(--panel-border);
@@ -242,7 +276,31 @@
         text-align: right;
       }
 
+      .video-embed-wrap {
+        position: relative;
+        width: 100%;
+        max-width: min(360px, 100%);
+        margin: 0.75rem auto 0;
+        aspect-ratio: 9 / 16;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        background: #0f172a;
+        border: 1px solid var(--panel-border);
+      }
+
+      .video-embed-wrap iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
       @media (max-width: 768px) {
+        .overview-side-menu {
+          display: none;
+        }
+
         .overview-card {
           padding: 1.5rem 1.2rem 2rem;
         }
@@ -372,6 +430,13 @@
       </nav>
       <div class="top-clock" aria-live="polite" id="syracuse-time">--:--:--</div>
     </header>
+
+    <aside class="overview-side-menu" aria-label="Overview sections">
+      <a class="overview-side-link" href="#overview-section">Overview</a>
+      <a class="overview-side-link" href="#projects-section">Project Descriptions</a>
+      <a class="overview-side-link" href="#video-section">Video</a>
+      <a class="overview-side-link" href="#blog-section">Reflection Blog</a>
+    </aside>
 
     <main>
       <section class="overview-wrap">
@@ -577,7 +642,24 @@
 
           <div class="portfolio-section" id="video-section">
             <h2>Recorded Video Presentation</h2>
-            <p class="placeholder-text">(1-2 minute video presentation will be embedded here)</p>
+            <p>
+              Short presentation (YouTube):
+              <a
+                href="https://youtube.com/shorts/fPtHRP2O8-U"
+                target="_blank"
+                rel="noopener noreferrer"
+                >youtube.com/shorts/fPtHRP2O8-U</a>
+            </p>
+            <div class="video-embed-wrap">
+              <iframe
+                src="https://www.youtube.com/embed/fPtHRP2O8-U?modestbranding=1"
+                title="IST-782 recorded video presentation"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+              ></iframe>
+            </div>
           </div>
 
           <div class="portfolio-section" id="blog-section">
@@ -591,140 +673,145 @@
                 <p>Dear Future Me,</p>
                 
                 <p>
-                  As I sit here completing my M.S. in Applied Data Science at Syracuse University, I find myself
-                  reflecting on the journey that brought me here and the transformation I've undergone. This letter
-                  is both a reflection and a roadmap - a way to capture what I've learned, how I've grown, and where
-                  I hope to go from here.
+                  As I complete my M.S. in Applied Data Science at Syracuse University, I can clearly see how much
+                  this program changed the way I think, build, and communicate. I came in wanting to become stronger
+                  technically, but I am leaving with something bigger: an end-to-end data science mindset that starts
+                  with problem framing and ends with practical decisions.
                 </p>
 
                 <p class="blog-section-title">What I Expected to Learn</p>
                 
                 <p>
-                  When I first enrolled in the program in August 2024, I came with a foundation in computer applications
-                  and practical experience as a Data Scientist at TATA ELXSI. I expected to deepen my technical skills
-                  in machine learning, statistical modeling, and data engineering. I anticipated learning the latest
-                  tools and frameworks - Python libraries, cloud platforms, and visualization techniques.
+                  When I started the program, I expected to sharpen my machine learning skills, improve my modeling
+                  accuracy, and become faster with tools like Python, SQL, and visualization frameworks. I also expected
+                  structured exposure to industry-style workflows so I could confidently move from class projects to
+                  real-world solutions.
                 </p>
 
                 <p>
-                  But what I didn't fully anticipate was how much the program would challenge me to think beyond the
-                  technical. I expected to learn how to build models; I didn't expect to learn how to question whether
-                  those models should be built at all. I expected to master algorithms; I didn't expect to master the
-                  art of translating complex technical findings into actionable insights for non-technical stakeholders.
+                  What I did not fully expect was how much emphasis would be placed on ambiguity, stakeholder context,
+                  and communication. I thought data science was mostly about building models; I learned that it is about
+                  solving the right problem first, then selecting methods that are useful, explainable, and responsible.
                 </p>
 
                 <p class="blog-section-title">What I Actually Learned</p>
 
                 <p>
-                  The program taught me that data science is not just about writing code or training models - it's about
-                  solving real problems in context. Each learning outcome became a lens through which I could view my
-                  work differently:
+                  The strongest outcome of this program is that I now approach projects with a full lifecycle mindset:
+                  define the problem, audit the data, engineer features, validate methods, communicate findings, and
+                  document limitations. Each learning outcome became practical through repeated project cycles.
                 </p>
 
                 <p>
-                  <strong>Data Infrastructure (Outcome 1):</strong> I learned that choosing the right technology isn't
-                  about picking the newest tool - it's about understanding the constraints, scale, and requirements of
-                  the problem. Working with Snowflake, building embeddings pipelines, and designing retrieval systems
-                  taught me that infrastructure decisions have downstream impacts on everything from model performance
-                  to operational costs.
+                  <strong>Outcome 1 - Data Infrastructure:</strong> I learned how to structure messy, real datasets into
+                  reliable pipelines. This includes ingestion strategy, schema consistency, preprocessing discipline, and
+                  storage choices that support analysis and model reproducibility.
                 </p>
 
                 <p>
-                  <strong>Actionable Insight (Outcome 2):</strong> This was perhaps the most transformative outcome.
-                  I learned that insight without action is just noise. Every project forced me to ask: "So what?"
-                  What decision does this enable? What risk does this mitigate? What opportunity does this reveal?
-                  The shift from "here's what the data shows" to "here's what we should do about it" was profound.
+                  <strong>Outcome 2 - Actionable Insight:</strong> I learned to move from "what happened" to
+                  "what should we do next." Instead of reporting metrics in isolation, I now tie findings to decisions,
+                  tradeoffs, and risk-management actions.
                 </p>
 
                 <p>
-                  <strong>Visualization & Modeling (Outcome 3):</strong> I discovered that the best model isn't always
-                  the most accurate one - it's the one that stakeholders trust and can act upon. Calibration, interpretability,
-                  and visualization became as important as precision and recall. SHAP values, confusion matrices, and
-                  learning curves weren't just diagnostic tools - they were communication tools.
+                  <strong>Outcome 3 - Visualization and Modeling:</strong> I learned that evaluation quality matters more
+                  than headline accuracy. Precision, recall, confusion matrices, ROC/AUC, and threshold tuning became
+                  essential tools for trustworthy model interpretation.
                 </p>
 
                 <p>
-                  <strong>Programming (Outcome 4):</strong> Python and R became more than languages - they became ways of
-                  thinking. I learned to write code that wasn't just correct, but maintainable, reproducible, and
-                  production-ready. I learned the difference between a notebook that works once and a pipeline that
-                  works reliably.
+                  <strong>Outcome 4 - Programming:</strong> Across Python and R workflows, I became more disciplined in
+                  writing modular, reproducible code. I now think in terms of reusable components, not one-off notebooks.
                 </p>
 
                 <p>
-                  <strong>Communication (Outcome 5):</strong> Perhaps the hardest skill to master. I learned that
-                  technical excellence means nothing if you can't explain it. I practiced translating statistical
-                  concepts into business language, visualizing uncertainty for non-technical audiences, and framing
-                  recommendations in terms of risk and opportunity rather than metrics and coefficients.
+                  <strong>Outcome 5 - Communication:</strong> I improved my ability to explain technical outputs to mixed
+                  audiences. I now frame results with context, recommendation, and limitation, so the work supports
+                  decision-making rather than staying academic.
                 </p>
 
                 <p>
-                  <strong>Ethics (Outcome 6):</strong> This outcome forced me to confront uncomfortable questions.
-                  What biases are baked into my training data? Who benefits from this model, and who might be harmed?
-                  What happens when my predictions are wrong? I learned that ethical data science isn't a checkbox - it's
-                  a continuous practice of questioning, auditing, and accountability.
+                  <strong>Outcome 6 - Ethics:</strong> The program reinforced fairness, transparency, and responsible use.
+                  I now treat bias risk, uncertainty, and model boundaries as central project deliverables, not optional
+                  add-ons.
                 </p>
 
                 <p class="blog-section-title">The Projects That Shaped Me</p>
 
                 <p>
-                  Three projects stand out as pivotal moments in my learning journey. Each one challenged me in different
-                  ways and helped me synthesize multiple learning outcomes into integrated practice.
+                  Three projects from my portfolio best represent how I developed as an applied data scientist.
                 </p>
 
                 <p>
-                  <strong>Project 1:</strong> [Details to be added]
+                  <strong>Project 1 - Bitcoin Flash-Crash Prediction (Price + Reddit Sentiment):</strong>
+                  This project taught me how to frame a rare-event prediction problem, align market and sentiment features,
+                  and evaluate beyond accuracy. I worked on threshold calibration, class-imbalance interpretation, and
+                  practical alert tradeoffs. It strengthened my confidence in machine learning evaluation under realistic
+                  constraints.
                 </p>
 
                 <p>
-                  <strong>Project 2:</strong> [Details to be added]
+                  <strong>Project 2 - Deep Learning Drowsiness Detection Using Infrared Images:</strong>
+                  This project helped me operationalize computer vision workflows from preprocessing to CNN evaluation.
+                  I learned how data quality, augmentation, and validation design affect performance reliability. It also
+                  reinforced that model performance must be interpreted in deployment context, not just in static scores.
                 </p>
 
                 <p>
-                  <strong>Project 3:</strong> [Details to be added]
+                  <strong>Project 3 - MediExplain (RAG and Modular AI Assistants):</strong>
+                  This project became the clearest example of human-centered AI design in my portfolio. I built a
+                  retrieval-grounded workflow to explain medical content in plain language while preserving safety framing.
+                  It strengthened my skills in retrieval design, modular architecture, and responsible communication for
+                  sensitive domains.
                 </p>
 
                 <p class="blog-section-title">Beyond the Classroom</p>
 
                 <p>
-                  My work at ProHealth Home Health & Hospice as a Data Scientist and AI Engineer, and my research role
-                  at NEXIS (Syracuse University), provided invaluable opportunities to apply classroom learning to
-                  real-world problems. These experiences taught me the messy reality of data science - incomplete data,
-                  shifting requirements, stakeholder politics, and the constant tension between perfect and good enough.
+                  My work outside class at ProHealth Home Health & Hospice and NEXIS gave me valuable practical exposure.
+                  These experiences reinforced the realities of applied data science: incomplete data, evolving business
+                  requirements, tight timelines, and the need to communicate tradeoffs clearly. They helped me bridge
+                  classroom rigor with production-minded execution.
                 </p>
 
                 <p class="blog-section-title">My Favorite Class</p>
 
                 <p>
-                  [To be added: Reflection on favorite course and why it resonated]
+                  My favorite class was <strong>IST 688 - Building HC-AI Apps</strong>. It stood out because it combined
+                  technical implementation with human-centered design and ethical responsibility. The course pushed me to
+                  design AI systems that are not only functional, but also understandable, safe, and useful for real users.
+                  It directly shaped how I approached MediExplain and strengthened my confidence in building practical
+                  AI applications with clear communication and guardrails.
                 </p>
 
                 <p class="blog-section-title">The Best Parts and Biggest Surprises</p>
 
                 <p>
-                  The best part of the program wasn't any single class or project - it was the cumulative effect of
-                  being constantly challenged to think differently. Every course pushed me out of my comfort zone in
-                  some way, whether technically, conceptually, or ethically.
+                  The best part of the program was the shift from assignment-based thinking to solution-based thinking.
+                  Over time, I stopped focusing only on "building a model" and started focusing on "delivering a useful,
+                  trusted outcome." That change in mindset is the biggest value I am taking forward.
                 </p>
 
                 <p>
-                  The biggest surprise? How much I learned from failure. Models that didn't converge, pipelines that
-                  broke in production, visualizations that confused rather than clarified - these "failures" taught me
-                  more than any success. They taught me resilience, debugging strategies, and the importance of building
-                  systems that fail gracefully.
+                  The biggest surprises were how much impact communication has, how much project quality depends on data
+                  preparation, and how critical evaluation discipline is for trustworthy deployment. I also gained much
+                  more confidence than I expected: I now feel prepared to scope, build, and present end-to-end data science
+                  work in professional environments.
                 </p>
 
                 <p class="blog-section-title">Looking Forward</p>
 
                 <p>
-                  As I complete this program with a 3.93 GPA, I'm proud of what I've accomplished. But more importantly,
-                  I'm excited about what I still don't know. The field of data science and AI is evolving rapidly, and
-                  this program has given me not just skills, but the ability to learn continuously.
+                  Completing this program has been a meaningful milestone. I leave with stronger technical depth,
+                  better reasoning under ambiguity, and clearer communication habits. More importantly, I now have a
+                  repeatable process for turning complex data problems into practical, actionable outcomes.
                 </p>
 
                 <p>
-                  To my future self: Remember that data science is a practice, not a destination. Keep questioning your
-                  assumptions. Keep learning from your mistakes. Keep asking "so what?" And most importantly, keep
-                  building things that matter.
+                  I am proud of the growth this journey represents, and I am excited to apply these skills in real
+                  settings where data, AI, and human-centered design intersect. The goal ahead is simple: keep building
+                  solutions that are technically strong, ethically grounded, and genuinely useful.
                 </p>
 
                 <p class="blog-signature">
@@ -791,6 +878,26 @@
       for (const heading of overviewHeadings) {
         headingObserver.observe(heading);
       }
+
+      const overviewSideLinks = [...document.querySelectorAll(".overview-side-link")];
+      const trackedSections = overviewSideLinks
+        .map((link) => document.querySelector(link.getAttribute("href")))
+        .filter(Boolean);
+
+      const updateOverviewMenuState = () => {
+        let activeId = trackedSections[0]?.id || "";
+        for (const section of trackedSections) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= window.innerHeight * 0.3) activeId = section.id;
+        }
+        for (const link of overviewSideLinks) {
+          const linkTarget = link.getAttribute("href")?.slice(1);
+          link.classList.toggle("is-active", linkTarget === activeId);
+        }
+      };
+
+      window.addEventListener("scroll", updateOverviewMenuState, { passive: true });
+      updateOverviewMenuState();
     </script>
     <script src="./script.js"></script>
   </body>
