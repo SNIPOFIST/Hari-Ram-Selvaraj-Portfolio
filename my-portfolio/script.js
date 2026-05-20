@@ -10,6 +10,10 @@ const tocLinks = [...document.querySelectorAll(".toc-link")];
 const aboutSection = document.getElementById("about");
 const projectCards = [...document.querySelectorAll("[data-project-card]")];
 const roleTrack = document.querySelector(".role-track");
+const taglineLine = document.getElementById("home-tagline-line");
+const contactForm = document.getElementById("contact-form");
+const contactFormStatus = document.getElementById("contact-form-status");
+const PORTFOLIO_EMAIL = "Hselvara@syr.edu";
 const iconGlows = [...document.querySelectorAll("[data-icon-glow]")];
 const aboutToc = document.getElementById("about-toc");
 const tocSectionLinks = [...document.querySelectorAll(".about-toc .toc-link")];
@@ -32,7 +36,7 @@ const detailNext = document.getElementById("detail-next");
 const homeSection = document.getElementById("home");
 const scrollCue = document.getElementById("scroll-cue");
 const syracuseTime = document.getElementById("syracuse-time");
-const aboutBlocks = ["Introduction", "Work Experience", "Studies", "Technical Skills"]
+const aboutBlocks = ["Work Experience", "Studies", "Technical Skills"]
   .map((id) => document.getElementById(id))
   .filter(Boolean);
 
@@ -51,6 +55,12 @@ let lastScrollY = window.scrollY;
 let nextMeteorAt = performance.now() + 9000 + Math.random() * 12000;
 let lastCursorPoint = null;
 let roleIndex = 0;
+const homeTaglineSentences = [
+  "Building machine learning models that turn complex data into predictions teams trust and deploy.",
+  "Developing AI RAG applications that retrieve the right context for grounded, explainable answers.",
+  "Engineering machine learning pipelines from ingestion and features through training and deployment.",
+  "Applying data analysis and statistical tests to validate hypotheses and measure real-world impact.",
+];
 let particleMode = document.documentElement.dataset.theme === "light" ? "falling" : "normal";
 let activeProjectCard = null;
 let activeSnapshotIndex = 0;
@@ -112,8 +122,8 @@ const projectDetailsById = {
     ],
     features: [
       "Joins Syracuse code violations to the 2025 assessment roll on SBL (~140k violation rows, ~41k parcels) with EDA on volume, complaint types, neighborhoods, and open vs closed.",
-      "Track A: sklearn Pipeline with ColumnTransformer  -  OLS regression on Assess_Total_Assessment; notebook Code_Violations_Assessment_Merge.ipynb.",
-      "Track B: city grid with crime, violations, vacancy, and assessment signals; Random Forest → Folium maps on GitHub Pages (grid risk, prediction dashboard, vacancy, confusion).",
+      "Track A: sklearn Pipeline with ColumnTransformer for OLS regression on Assess_Total_Assessment; notebook Code_Violations_Assessment_Merge.ipynb.",
+      "Track B: city grid with crime, violations, vacancy, and assessment signals; Random Forest to Folium maps on GitHub Pages (grid risk, prediction dashboard, vacancy, confusion).",
     ],
   },
   4: {
@@ -135,9 +145,9 @@ const projectDetailsById = {
     ],
   },
   5: {
-    github: "https://github.com/SNIPOFIST/mediexplain-RAG_with_modular_AI_assistants-",
-    live: "https://github.com/SNIPOFIST/mediexplain-RAG_with_modular_AI_assistants-",
-    caseStudy: "https://github.com/SNIPOFIST/mediexplain-RAG_with_modular_AI_assistants-",
+    github: "https://github.com/SNIPOFIST/MediExplain---RAG-with-Modular-AI-assistants-Chatbot",
+    live: "https://github.com/SNIPOFIST/MediExplain---RAG-with-Modular-AI-assistants-Chatbot",
+    caseStudy: "https://github.com/SNIPOFIST/MediExplain---RAG-with-Modular-AI-assistants-Chatbot",
     stack: "Python, Streamlit, OpenAI API, ChromaDB, NLP pipelines",
     highLevel:
       "MediExplain is a research-grade Streamlit app that simplifies medical text for patients, supports retrieval-grounded responses with RAG, and includes modular AI assistants for synthetic clinical workflows.",
@@ -407,6 +417,7 @@ function animate(now) {
       trailContext.fillStyle = `rgba(255, 255, 255, ${alpha * 0.8})`;
       trailContext.arc(streak.toX, streak.toY, Math.max(0.6, streak.width * 0.45 * alpha), 0, Math.PI * 2);
       trailContext.fill();
+
     }
   }
   scrollDriftY *= 0.92;
@@ -452,7 +463,7 @@ function updateNebulaState() {
     return;
   }
 
-  let activeLabel = "Introduction";
+  let activeLabel = "Work Experience";
   for (const block of aboutBlocks) {
     const rect = block.getBoundingClientRect();
     if (rect.top <= window.innerHeight * 0.34 && rect.bottom > window.innerHeight * 0.2) {
@@ -490,10 +501,9 @@ function scrollToTarget(id, offset = 80) {
 function updateHomeScrollFx() {
   if (!homeSection || !scrollCue) return;
   const homeRect = homeSection.getBoundingClientRect();
-  const distance = Math.max(1, window.innerHeight * 0.28);
+  const distance = Math.max(1, window.innerHeight * 0.35);
   const progress = Math.min(1, Math.max(0, -homeRect.top / distance));
-  document.documentElement.style.setProperty("--home-progress", progress.toFixed(3));
-  scrollCue.style.setProperty("--scroll-progress", progress.toFixed(3));
+  scrollCue.style.setProperty("--scroll-progress", progress.toFixed(4));
 }
 
 function updateAboutSidebarMotion() {
@@ -711,31 +721,133 @@ function closeProjectDetail(options = {}) {
   }, 560);
 }
 
-function startRoleTicker() {
-  if (!roleTrack) return;
+function startVerticalTicker(track, options = {}) {
+  if (!track) return;
 
-  const totalItems = roleTrack.children.length;
+  const getStepRem =
+    options.getStepRem ??
+    (() => {
+      return options.stepRem ?? 2;
+    });
+  const intervalMs = options.intervalMs ?? 3200;
+  const onIndexChange = options.onIndexChange;
+  let index = 0;
+  const totalItems = track.children.length;
   if (totalItems < 2) return;
 
   setInterval(() => {
-    roleIndex += 1;
-    roleTrack.classList.add("is-spinning");
-    roleTrack.style.transition = "transform 280ms steps(6, end)";
-    roleTrack.style.transform = `translateY(-${roleIndex * 2}rem)`;
+    const stepRem = getStepRem();
+    index += 1;
+    track.classList.add("is-spinning");
+    track.style.transition = "transform 320ms steps(6, end)";
+    track.style.transform = `translateY(-${index * stepRem}rem)`;
+    onIndexChange?.(index);
 
-    if (roleIndex === totalItems - 1) {
+    if (index === totalItems - 1) {
       window.setTimeout(() => {
-        roleTrack.style.transition = "none";
-        roleTrack.style.transform = "translateY(0)";
-        roleIndex = 0;
-        roleTrack.classList.remove("is-spinning");
-      }, 360);
+        track.style.transition = "none";
+        track.style.transform = "translateY(0)";
+        index = 0;
+        onIndexChange?.(0);
+        track.classList.remove("is-spinning");
+      }, 380);
     } else {
       window.setTimeout(() => {
-        roleTrack.classList.remove("is-spinning");
-      }, 320);
+        track.classList.remove("is-spinning");
+      }, 340);
     }
-  }, 1900);
+  }, intervalMs);
+}
+
+function startRoleTicker() {
+  startVerticalTicker(roleTrack, {
+    stepRem: 2,
+    intervalMs: 1900,
+    onIndexChange: (i) => {
+      roleIndex = i;
+    },
+  });
+}
+
+function wait(ms) {
+  return new Promise((resolve) => {
+    window.setTimeout(resolve, ms);
+  });
+}
+
+function buildTaglineWords(sentence) {
+  if (!taglineLine) return [];
+  taglineLine.textContent = "";
+  const tokens = sentence.split(" ");
+  const wordNodes = [];
+
+  for (let i = 0; i < tokens.length; i += 1) {
+    const word = document.createElement("span");
+    word.className = "home-tagline-word";
+    word.textContent = tokens[i];
+    taglineLine.appendChild(word);
+    wordNodes.push(word);
+    if (i < tokens.length - 1) {
+      taglineLine.appendChild(document.createTextNode(" "));
+    }
+  }
+
+  return wordNodes;
+}
+
+async function revealTaglineWords(wordNodes, delayMs = 70) {
+  for (const word of wordNodes) {
+    word.classList.remove("is-out");
+    word.classList.add("is-in");
+    await wait(delayMs);
+  }
+}
+
+async function hideTaglineWords(wordNodes, delayMs = 55) {
+  for (let i = wordNodes.length - 1; i >= 0; i -= 1) {
+    const word = wordNodes[i];
+    word.classList.remove("is-in");
+    word.classList.add("is-out");
+    await wait(delayMs);
+  }
+}
+
+async function runWordTaglineLoop() {
+  if (!taglineLine || homeTaglineSentences.length === 0) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const revealDelay = reducedMotion ? 0 : 70;
+  const hideDelay = reducedMotion ? 0 : 55;
+  const holdMs = reducedMotion ? 2800 : 2200;
+  const betweenMs = reducedMotion ? 500 : 380;
+
+  while (true) {
+    for (const sentence of homeTaglineSentences) {
+      const words = buildTaglineWords(sentence);
+      if (words.length === 0) continue;
+
+      if (reducedMotion) {
+        for (const word of words) {
+          word.classList.add("is-in");
+        }
+        await wait(holdMs);
+        for (const word of words) {
+          word.classList.remove("is-in", "is-out");
+        }
+      } else {
+        await revealTaglineWords(words, revealDelay);
+        await wait(holdMs);
+        await hideTaglineWords(words, hideDelay);
+      }
+
+      taglineLine.textContent = "";
+      await wait(betweenMs);
+    }
+  }
+}
+
+function startTaglineTicker() {
+  runWordTaglineLoop();
 }
 
 window.addEventListener("mousemove", (event) => {
@@ -775,6 +887,7 @@ window.addEventListener("resize", () => {
   resizeCanvas();
   resizeTrailCanvas();
   updateAboutSidebarMotion();
+  updateHomeScrollFx();
 });
 window.addEventListener(
   "scroll",
@@ -892,6 +1005,33 @@ for (const icon of iconGlows) {
   icon.addEventListener("mousemove", updateProjectCardGlow);
 }
 
+function setContactFormStatus(message, isError = false) {
+  if (!contactFormStatus) return;
+  contactFormStatus.textContent = message;
+  contactFormStatus.classList.toggle("is-error", isError);
+}
+
+contactForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formData = new FormData(contactForm);
+  const name = String(formData.get("name") || "").trim();
+  const senderEmail = String(formData.get("email") || "").trim();
+  const message = String(formData.get("message") || "").trim();
+
+  if (!name || !senderEmail || !message) {
+    setContactFormStatus("Please fill in your name, email, and message.", true);
+    return;
+  }
+
+  const subject = encodeURIComponent(`Portfolio contact from ${name}`);
+  const body = encodeURIComponent(
+    `Hi Hari,\n\n${message}\n\nFrom: ${name}\nReply-to: ${senderEmail}`,
+  );
+
+  setContactFormStatus("Opening your email app. Send the message from your inbox.");
+  window.location.href = `mailto:${PORTFOLIO_EMAIL}?subject=${subject}&body=${body}`;
+});
+
 for (const link of document.querySelectorAll("a[href]")) {
   const href = link.getAttribute("href") || "";
   const isInternalHash = href.startsWith("#");
@@ -914,6 +1054,7 @@ updateAboutSidebarMotion();
 updateSyracuseTime();
 window.setInterval(updateSyracuseTime, 1000);
 startRoleTicker();
+startTaglineTicker();
 window.requestAnimationFrame(animate);
 
 const initialProjectSlug = new URL(window.location.href).searchParams.get("project");
