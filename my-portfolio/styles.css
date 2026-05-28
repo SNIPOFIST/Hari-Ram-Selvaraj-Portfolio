@@ -306,7 +306,8 @@ html[data-theme="light"] .home-name:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  align-self: center;
+  align-self: flex-start;
+  margin-top: clamp(-2.1rem, -2vw, -1.1rem);
   position: relative;
   transform: none;
   opacity: 1;
@@ -423,7 +424,7 @@ html[data-theme="light"] .home-name:hover {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 3.5rem);
+  bottom: calc(max(0.85rem, env(safe-area-inset-bottom)) + 2.6rem);
   z-index: 1;
   width: min(96vw, 72rem);
   pointer-events: none;
@@ -2033,6 +2034,7 @@ html[data-theme="light"] .toc-link.is-current .toc-text {
 
   .home-col--photo {
     order: -1;
+    margin-top: -0.85rem;
   }
 
   .home-photo {
@@ -2041,7 +2043,7 @@ html[data-theme="light"] .toc-link.is-current .toc-text {
 
   .home-tagline-wrap {
     width: min(94vw, 72rem);
-    bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 3.75rem);
+    bottom: calc(max(0.85rem, env(safe-area-inset-bottom)) + 2.9rem);
   }
 
   .home-tagline-line {
