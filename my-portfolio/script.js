@@ -28,9 +28,7 @@ const detailHighLevelCopy = document.getElementById("detail-high-level-copy");
 const detailFeaturesList = document.getElementById("detail-features-list");
 const detailDatasetsSection = document.getElementById("detail-datasets");
 const detailDatasetsList = document.getElementById("detail-datasets-list");
-const detailCaseStudy = document.getElementById("detail-case-study");
 const detailLive = document.getElementById("detail-live");
-const detailGithub = document.getElementById("detail-github");
 const detailStack = document.getElementById("detail-stack");
 const homeSection = document.getElementById("home");
 const scrollCue = document.getElementById("scroll-cue");
@@ -73,7 +71,6 @@ const projectDetailsById = {
   1: {
     github: "https://github.com/SNIPOFIST/Bitcoin-FlashCrash-Prediction",
     live: "https://github.com/SNIPOFIST/Bitcoin-FlashCrash-Prediction",
-    caseStudy: "https://github.com/SNIPOFIST/Bitcoin-FlashCrash-Prediction",
     stack: "Python, PyTorch, scikit-learn, Pandas, VADER, FinBERT",
     highLevel:
       "Built a binary sequence model to detect Bitcoin flash-crash minutes by combining minute-level market behavior (from 3.4M second-level BTC records) with 11,890 time-aligned Reddit sentiment rows for interpretable risk monitoring.",
@@ -90,7 +87,6 @@ const projectDetailsById = {
   2: {
     github: "https://github.com/SNIPOFIST/Deep_Learning-Drowsiness_Detection_Using_Infrared_Images",
     live: "https://snipofist.github.io/Deep_Learning-Drowsiness_Detection_Using_Infrared_Images/",
-    caseStudy: "https://github.com/SNIPOFIST/Deep_Learning-Drowsiness_Detection_Using_Infrared_Images",
     stack: "TensorFlow, Python, NumPy, Pandas, Matplotlib, scikit-learn, OpenCV, Pillow, dlib",
     highLevel:
       "Developed an infrared eye-image drowsiness classifier that predicts awake vs sleepy states, creating a practical foundation for in-cabin driver alert systems.",
@@ -103,7 +99,6 @@ const projectDetailsById = {
   3: {
     github: "https://github.com/SNIPOFIST/DataThon26",
     live: "https://snipofist.github.io/DataThon26/",
-    caseStudy: "https://github.com/SNIPOFIST/DataThon26",
     stack: "Python, Jupyter, pandas, NumPy, scikit-learn, Matplotlib, Seaborn, GeoPandas, Folium, Shapely",
     highLevel:
       "Merged Syracuse violations with assessment data to build analysis and geospatial risk views that help stakeholders identify patterns and prioritize inspections.",
@@ -116,7 +111,6 @@ const projectDetailsById = {
   4: {
     github: "https://github.com/SNIPOFIST/Syracuse_City_Crime_Data_Visualization",
     live: "https://mydatasciencegallery.shinyapps.io/Syracuse_Crime_Data_Visualization/",
-    caseStudy: "https://github.com/SNIPOFIST/Syracuse_City_Crime_Data_Visualization",
     stack: "R, Shiny, Leaflet, ggplot2, tidyverse, dplyr, sf, jsonlite",
     highLevel:
       "Created an interactive Shiny dashboard for Syracuse crime exploration, enabling map-based and time-based analysis for faster public-safety insight.",
@@ -129,10 +123,14 @@ const projectDetailsById = {
   5: {
     github: "https://github.com/SNIPOFIST/MediExplain---RAG-with-Modular-AI-assistants-Chatbot",
     live: "https://github.com/SNIPOFIST/MediExplain---RAG-with-Modular-AI-assistants-Chatbot",
-    caseStudy: "https://github.com/SNIPOFIST/MediExplain---RAG-with-Modular-AI-assistants-Chatbot",
     stack: "Python, Streamlit, OpenAI API, ChromaDB, NLP pipelines",
     highLevel:
-      "MediExplain is a research-grade Streamlit app that simplifies medical text for patients, supports retrieval-grounded responses with RAG, and includes modular AI assistants for synthetic clinical workflows.",
+      "MediExplain is a research-grade Streamlit app that simplifies medical text for patients, grounds explanations with RAG over PMC-style literature in Chroma, and runs modular AI assistants for synthetic clinical workflow demos.",
+    datasets: [
+      "PMC HTML articles (local mediexplain/html/) indexed into a persistent Chroma vector store for literature-grounded retrieval.",
+      "OpenAI chat and text-embedding-3-small models for explanations, embeddings, and multi-step synthetic patient record generation.",
+      "Medication RAG knowledge stores (project-specific indexes under meds_rag modules) for drug-focused retrieval experiments.",
+    ],
     features: [
       "Converts dense clinical language into patient-friendly explanations with clear non-medical-advice guardrails.",
       "Uses retrieval over indexed medical literature to ground responses and improve transparency.",
@@ -142,7 +140,6 @@ const projectDetailsById = {
   6: {
     github: "https://github.com/",
     live: "https://github.com/",
-    caseStudy: "https://github.com/",
     stack: "JavaScript, Node.js",
     features: ["Developed interactive front-end workflow.", "Connected APIs with resilient handling.", "Improved usability with microinteractions."],
   },
@@ -562,8 +559,7 @@ function renderProjectDetail(card) {
     links.find((link) => !link.classList.contains("project-card-view") && !link.classList.contains("project-card-github"))?.href ||
     detailData.live ||
     detailData.github;
-  const githubLink = card.querySelector(".project-card-github")?.href || detailData.github;
-  const caseStudyLink = detailData.caseStudy || githubLink;
+  const projectLink = detailData.live || detailData.github;
 
   if (detailTitle) detailTitle.textContent = title;
   if (detailSubtitle) detailSubtitle.textContent = "Full project details";
@@ -596,9 +592,7 @@ function renderProjectDetail(card) {
     }
   }
 
-  if (detailCaseStudy) detailCaseStudy.href = caseStudyLink;
-  if (detailLive) detailLive.href = directProjectLink;
-  if (detailGithub) detailGithub.href = githubLink;
+  if (detailLive) detailLive.href = directProjectLink || projectLink;
   if (detailStack) detailStack.textContent = `Tech Stack: ${detailData.stack}`;
 }
 
