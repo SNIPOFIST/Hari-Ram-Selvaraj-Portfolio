@@ -26,13 +26,12 @@ const detailSubtitle = document.getElementById("detail-subtitle");
 const detailDescription = document.getElementById("detail-description");
 const detailHighLevelCopy = document.getElementById("detail-high-level-copy");
 const detailFeaturesList = document.getElementById("detail-features-list");
+const detailDatasetsSection = document.getElementById("detail-datasets");
+const detailDatasetsList = document.getElementById("detail-datasets-list");
 const detailCaseStudy = document.getElementById("detail-case-study");
 const detailLive = document.getElementById("detail-live");
 const detailGithub = document.getElementById("detail-github");
 const detailStack = document.getElementById("detail-stack");
-const detailTrack = document.getElementById("detail-media-track");
-const detailPrev = document.getElementById("detail-prev");
-const detailNext = document.getElementById("detail-next");
 const homeSection = document.getElementById("home");
 const scrollCue = document.getElementById("scroll-cue");
 const syracuseTime = document.getElementById("syracuse-time");
@@ -63,7 +62,6 @@ const homeTaglineSentences = [
 ];
 let particleMode = document.documentElement.dataset.theme === "light" ? "falling" : "normal";
 let activeProjectCard = null;
-let activeSnapshotIndex = 0;
 let isDetailAnimating = false;
 let canvasPalette = {
   star: "255, 255, 255",
@@ -78,11 +76,10 @@ const projectDetailsById = {
     caseStudy: "https://github.com/SNIPOFIST/Bitcoin-FlashCrash-Prediction",
     stack: "Python, PyTorch, scikit-learn, Pandas, VADER, FinBERT",
     highLevel:
-      "Built a binary sequence model to detect Bitcoin flash-crash minutes by combining minute-level market behavior with Reddit sentiment features for interpretable risk monitoring.",
-    snapshots: [
-      "https://images.unsplash.com/photo-1551281044-8b9d3f117d1f?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1400&q=80",
+      "Built a binary sequence model to detect Bitcoin flash-crash minutes by combining minute-level market behavior (from 3.4M second-level BTC records) with 11,890 time-aligned Reddit sentiment rows for interpretable risk monitoring.",
+    datasets: [
+      "Bitcoin market data: 3.4 million records at second-level resolution, aggregated to minute-level OHLCV bars and engineered features for 60-minute sequence modeling.",
+      "Reddit sentiment: 11,890 scored posts and comments from crypto subreddits, aligned to market minutes with per-subreddit VADER aggregates (FinBERT scoring in parallel experiments).",
     ],
     features: [
       "Threshold 0.4 run in BTC_Vader.ipynb reaches test accuracy 0.7095 with class 1.0 F1 around 0.74 and class 0.0 F1 around 0.67.",
@@ -97,11 +94,6 @@ const projectDetailsById = {
     stack: "TensorFlow, Python, NumPy, Pandas, Matplotlib, scikit-learn, OpenCV, Pillow, dlib",
     highLevel:
       "Developed an infrared eye-image drowsiness classifier that predicts awake vs sleepy states, creating a practical foundation for in-cabin driver alert systems.",
-    snapshots: [
-      "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1400&q=80",
-    ],
     features: [
       "Classifies infrared eye-region crops into awake vs sleepy classes to support drowsiness risk monitoring.",
       "Trained on the MRL Eye Dataset (~84,898 images) with balanced train/val/test splits and grayscale preprocessing at 64x64.",
@@ -115,11 +107,6 @@ const projectDetailsById = {
     stack: "Python, Jupyter, pandas, NumPy, scikit-learn, Matplotlib, Seaborn, GeoPandas, Folium, Shapely",
     highLevel:
       "Merged Syracuse violations with assessment data to build analysis and geospatial risk views that help stakeholders identify patterns and prioritize inspections.",
-    snapshots: [
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1484417894907-623942c8ee29?auto=format&fit=crop&w=1400&q=80",
-    ],
     features: [
       "Joins Syracuse code violations to the 2025 assessment roll on SBL (~140k violation rows, ~41k parcels) with EDA on volume, complaint types, neighborhoods, and open vs closed.",
       "Track A: sklearn Pipeline with ColumnTransformer for OLS regression on Assess_Total_Assessment; notebook Code_Violations_Assessment_Merge.ipynb.",
@@ -133,11 +120,6 @@ const projectDetailsById = {
     stack: "R, Shiny, Leaflet, ggplot2, tidyverse, dplyr, sf, jsonlite",
     highLevel:
       "Created an interactive Shiny dashboard for Syracuse crime exploration, enabling map-based and time-based analysis for faster public-safety insight.",
-    snapshots: [
-      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=1400&q=80",
-      "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1400&q=80",
-    ],
     features: [
       "Built an interactive R Shiny dashboard to filter Syracuse incidents by crime type and date, then visualize them on a Leaflet map and daily time-series chart.",
       "Ingests and harmonizes two city open-data CSV files (merged snapshot 9,671 x 10) and parses DATEEND for date-driven analytics.",
@@ -151,7 +133,6 @@ const projectDetailsById = {
     stack: "Python, Streamlit, OpenAI API, ChromaDB, NLP pipelines",
     highLevel:
       "MediExplain is a research-grade Streamlit app that simplifies medical text for patients, supports retrieval-grounded responses with RAG, and includes modular AI assistants for synthetic clinical workflows.",
-    snapshots: [],
     features: [
       "Converts dense clinical language into patient-friendly explanations with clear non-medical-advice guardrails.",
       "Uses retrieval over indexed medical literature to ground responses and improve transparency.",
@@ -163,7 +144,6 @@ const projectDetailsById = {
     live: "https://github.com/",
     caseStudy: "https://github.com/",
     stack: "JavaScript, Node.js",
-    snapshots: [],
     features: ["Developed interactive front-end workflow.", "Connected APIs with resilient handling.", "Improved usability with microinteractions."],
   },
 };
@@ -547,16 +527,6 @@ function createZoomGhost(rect) {
   return ghost;
 }
 
-function updateSnapshotPosition(index) {
-  if (!detailTrack) return;
-  const max = Math.max(0, detailTrack.children.length - 1);
-  activeSnapshotIndex = Math.min(Math.max(index, 0), max);
-  const slide = detailTrack.children[activeSnapshotIndex];
-  if (slide) {
-    slide.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
-  }
-}
-
 function getProjectSlug(card) {
   const title = card.querySelector("h3")?.textContent?.trim() || "project";
   return title
@@ -584,7 +554,8 @@ function getUrlWithoutProject() {
 function renderProjectDetail(card) {
   const id = Number(card.dataset.projectId || 1);
   const title = card.querySelector("h3")?.textContent?.trim() || "Project Title";
-  const summary = card.querySelector("p")?.textContent?.trim() || "Project summary placeholder.";
+  const summary =
+    card.querySelector("p:not(.project-card-meta)")?.textContent?.trim() || "Project summary placeholder.";
   const detailData = projectDetailsById[id] || projectDetailsById[1];
   const links = [...card.querySelectorAll(".project-card-actions a")];
   const directProjectLink =
@@ -595,7 +566,7 @@ function renderProjectDetail(card) {
   const caseStudyLink = detailData.caseStudy || githubLink;
 
   if (detailTitle) detailTitle.textContent = title;
-  if (detailSubtitle) detailSubtitle.textContent = "Scrollable gallery and full project details";
+  if (detailSubtitle) detailSubtitle.textContent = "Full project details";
   if (detailDescription) {
     detailDescription.textContent =
       `${summary} This project detail view is designed for deeper context, implementation notes, and business outcomes.`;
@@ -603,6 +574,17 @@ function renderProjectDetail(card) {
   if (detailHighLevelCopy) {
     detailHighLevelCopy.textContent =
       detailData.highLevel || "High-level project description will be added soon.";
+  }
+
+  if (detailDatasetsSection && detailDatasetsList) {
+    const datasets = detailData.datasets || [];
+    detailDatasetsSection.hidden = datasets.length === 0;
+    detailDatasetsList.innerHTML = "";
+    for (const row of datasets) {
+      const item = document.createElement("li");
+      item.textContent = row;
+      detailDatasetsList.appendChild(item);
+    }
   }
 
   if (detailFeaturesList) {
@@ -618,28 +600,6 @@ function renderProjectDetail(card) {
   if (detailLive) detailLive.href = directProjectLink;
   if (detailGithub) detailGithub.href = githubLink;
   if (detailStack) detailStack.textContent = `Tech Stack: ${detailData.stack}`;
-
-  if (detailTrack) {
-    detailTrack.innerHTML = "";
-    const slides = detailData.snapshots || [];
-    for (const imageUrl of slides) {
-      const snap = document.createElement("div");
-      snap.className = "detail-media-card";
-      const img = document.createElement("img");
-      img.src = imageUrl;
-      img.alt = `${title} snapshot`;
-      img.loading = "lazy";
-      snap.appendChild(img);
-      detailTrack.appendChild(snap);
-    }
-    if (slides.length === 0) {
-      const empty = document.createElement("div");
-      empty.className = "detail-media-card detail-media-card-empty";
-      empty.textContent = "Snapshots coming soon";
-      detailTrack.appendChild(empty);
-    }
-  }
-  activeSnapshotIndex = 0;
 }
 
 function openProjectDetail(card, options = {}) {
@@ -966,14 +926,6 @@ if (projectCards.length > 0) {
 for (const closeButton of detailCloseButtons) {
   closeButton.addEventListener("click", () => closeProjectDetail({ updateHistory: false }));
 }
-
-detailPrev?.addEventListener("click", () => {
-  updateSnapshotPosition(activeSnapshotIndex - 1);
-});
-
-detailNext?.addEventListener("click", () => {
-  updateSnapshotPosition(activeSnapshotIndex + 1);
-});
 
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && projectDetail?.classList.contains("is-open")) {

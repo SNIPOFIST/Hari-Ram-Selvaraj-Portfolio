@@ -979,12 +979,6 @@ body.detail-open {
   margin-bottom: 1.1rem;
 }
 
-.detail-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
-  gap: 1.2rem;
-}
-
 .detail-main {
   display: grid;
   gap: 1rem;
@@ -1051,73 +1045,6 @@ body.detail-open {
   color: var(--text-main);
   text-decoration: none;
   font-size: 0.88rem;
-}
-
-.detail-media {
-  display: grid;
-  gap: 0.85rem;
-}
-
-.detail-media-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.detail-media-head h3 {
-  margin: 0;
-  font-size: 1rem;
-}
-
-.detail-media-nav {
-  display: inline-flex;
-  gap: 0.45rem;
-}
-
-.detail-media-nav button {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 999px;
-  border: 1px solid var(--panel-border);
-  background: color-mix(in srgb, var(--panel-bg) 88%, transparent);
-  color: var(--text-main);
-  cursor: pointer;
-}
-
-.detail-media-track {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 100%;
-  gap: 0.75rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 0.35rem;
-}
-
-.detail-media-card {
-  scroll-snap-align: start;
-  min-height: 420px;
-  border-radius: 1rem;
-  border: 1px solid color-mix(in srgb, var(--panel-border) 95%, transparent);
-  overflow: hidden;
-}
-
-.detail-media-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.detail-media-card-empty {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: center;
-  color: var(--text-muted);
-  background:
-    radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--text-main) 10%, transparent), transparent 45%),
-    linear-gradient(135deg, color-mix(in srgb, var(--panel-bg) 92%, transparent), color-mix(in srgb, var(--page-bg) 22%, transparent));
 }
 
 .detail-zoom-ghost {
@@ -1560,6 +1487,12 @@ html[data-theme="light"] .toc-link.is-current .toc-text {
   background-color: #ff694b;
   -webkit-mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@11.6.0/icons/dbt.svg");
   mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@11.6.0/icons/dbt.svg");
+}
+
+.skill-icon-brand--databricks {
+  background-color: #ff3621;
+  -webkit-mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@11.6.0/icons/databricks.svg");
+  mask-image: url("https://cdn.jsdelivr.net/npm/simple-icons@11.6.0/icons/databricks.svg");
 }
 
 .skill-icon-card span {
@@ -2051,10 +1984,6 @@ html[data-theme="light"] .toc-link.is-current .toc-text {
   }
 
   .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .detail-layout {
     grid-template-columns: 1fr;
   }
 

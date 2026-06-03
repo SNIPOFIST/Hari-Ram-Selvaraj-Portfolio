@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=12" />
+    <link rel="stylesheet" href="./styles.css?v=14" />
   </head>
   <body>
     <canvas id="particles" aria-hidden="true"></canvas>
@@ -235,6 +235,10 @@
                       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git" loading="lazy" decoding="async" />
                       <span>Git</span>
                     </div>
+                    <div class="skill-icon-card">
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/matlab/matlab-original.svg" alt="MATLAB" loading="lazy" decoding="async" />
+                      <span>MATLAB</span>
+                    </div>
                   </div>
                 </section>
 
@@ -291,6 +295,10 @@
                       <span class="skill-icon-brand skill-icon-brand--dbt" role="img" aria-label="dbt"></span>
                       <span>dbt</span>
                     </div>
+                    <div class="skill-icon-card">
+                      <span class="skill-icon-brand skill-icon-brand--databricks" role="img" aria-label="Databricks"></span>
+                      <span>Databricks</span>
+                    </div>
                   </div>
                 </section>
               </div>
@@ -317,10 +325,11 @@
                     loading="lazy"
                   />
                 </div>
-               <h3>Bitcoin flash crash prediction: Reddit sentiment + price signals</h3>
+                <p class="project-card-meta">Machine Learning</p>
+                <h3>Machine Learning for Bitcoin flash crash prediction: sentiment and market signals</h3>
                 <p>
-                  Binary flash-crash classifier using minute-level BTC market signals and
-                  time-aligned Reddit sentiment for risk monitoring research.
+                  Binary flash-crash classifier on minute-level BTC features (3.4M second-level
+                  records) and 11,890 time-aligned Reddit sentiment rows for risk monitoring research.
                 </p>
                 <div class="project-card-actions">
                   <a class="project-card-link project-card-view" href="#">View Details</a>
@@ -361,7 +370,8 @@
                 <div class="project-card-media">
                   <img src="./assets/Syracuse Streets & Parcels Code Enforcement, Assessment, and Neighborhood Risk.png" alt="Syracuse streets and parcels project preview" loading="lazy" />
                 </div>
-                <h3>DataThon: Syracuse code violations &amp; property assessment</h3>
+                <p class="project-card-meta">Machine Learning</p>
+                <h3>Machine Learning for Syracuse code violations: assessment modeling and spatial risk</h3>
                 <p>
                   Join Syracuse code violations to the 2025 assessment roll, explore patterns, model assessment vs
                   violations, and ship Folium spatial risk maps (Track B) plus EDA (Track A).
@@ -509,39 +519,30 @@
         <h2 id="detail-title" class="detail-title">Project Title</h2>
         <p class="detail-subtitle" id="detail-subtitle">Project overview</p>
 
-        <div class="detail-layout">
-          <div class="detail-main">
-            <p class="detail-description" id="detail-description"></p>
-            <section class="detail-high-level">
-              <h3>High-level project description</h3>
-              <p id="detail-high-level-copy"></p>
-            </section>
-            <div class="detail-actions">
-              <a class="detail-action" id="detail-case-study" href="#" target="_blank" rel="noreferrer">Read case study</a>
-              <a class="detail-action" id="detail-live" href="#" target="_blank" rel="noreferrer">View project</a>
-              <a class="detail-action" id="detail-github" href="#" target="_blank" rel="noreferrer">GitHub</a>
-            </div>
-            <section class="detail-features">
-              <h3>Impact / Key Features</h3>
-              <ul id="detail-features-list"></ul>
-            </section>
-            <span class="detail-action detail-stack" id="detail-stack"></span>
+        <div class="detail-main">
+          <p class="detail-description" id="detail-description"></p>
+          <section class="detail-high-level">
+            <h3>High-level project description</h3>
+            <p id="detail-high-level-copy"></p>
+          </section>
+          <section class="detail-features" id="detail-datasets" hidden>
+            <h3>Dataset</h3>
+            <ul id="detail-datasets-list"></ul>
+          </section>
+          <div class="detail-actions">
+            <a class="detail-action" id="detail-case-study" href="#" target="_blank" rel="noreferrer">Read case study</a>
+            <a class="detail-action" id="detail-live" href="#" target="_blank" rel="noreferrer">View project</a>
+            <a class="detail-action" id="detail-github" href="#" target="_blank" rel="noreferrer">GitHub</a>
           </div>
-
-          <aside class="detail-media">
-            <div class="detail-media-head">
-              <h3>Project Gallery</h3>
-              <div class="detail-media-nav">
-                <button type="button" id="detail-prev" aria-label="Previous snapshot">&lt;</button>
-                <button type="button" id="detail-next" aria-label="Next snapshot">&gt;</button>
-              </div>
-            </div>
-            <div class="detail-media-track" id="detail-media-track"></div>
-          </aside>
+          <section class="detail-features">
+            <h3>Impact / Key Features</h3>
+            <ul id="detail-features-list"></ul>
+          </section>
+          <span class="detail-action detail-stack" id="detail-stack"></span>
         </div>
       </article>
     </section>
 
-    <script src="./script.js?v=11"></script>
+    <script src="./script.js?v=17"></script>
   </body>
 </html>
